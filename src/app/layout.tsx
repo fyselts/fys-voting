@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 // Assuming we don't need fonts or file isn't present, let's keep it simple.
 import "./globals.css";
 import { LanguageProvider } from '@/context/LanguageContext';
+import Header from '@/components/header';
 
 export const metadata: Metadata = {
   title: "FYS Voting",
@@ -18,6 +19,7 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <LanguageProvider>
+          <Header />
           {children}
         </LanguageProvider>
       </body>

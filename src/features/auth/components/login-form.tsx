@@ -3,57 +3,69 @@
 import { useActionState, useEffect } from 'react'
 import { checkUser } from '@/features/auth/actions'
 import { useLanguage } from '@/context/LanguageContext'
+import { Card } from '@/components/ui/card'
+import { Form } from '@/components/ui/form'
+import { Button } from '@/components/ui/button'
+import { StyledLink } from '@/components/ui/styled-link'
+import { InputWithIcon } from '@/components/ui/input-with-icon'
+import { PersonIcon, AtIcon, ArrowRightIcon } from '@/components/ui/icons'
 
 const initialState = {
-    message: '',
-    success: false,
-    email: ''
+  message: '',
+  success: false,
+  email: ''
 }
 
 export function LoginForm({ onSuccess }: { onSuccess: (email: string) => void }) {
-    const [state, formAction, isPending] = useActionState(checkUser, initialState)
-    const { t } = useLanguage()
+  const [state, formAction, isPending] = useActionState(checkUser, initialState)
+  const { t } = useLanguage()
 
-    useEffect(() => {
-        if (state?.success && state.email) {
-            onSuccess(state.email)
-        }
-    }, [state, onSuccess])
+  useEffect(() => {
+    if (state?.success && state.email) {
+      onSuccess(state.email)
+    }
+  }, [state, onSuccess])
 
-    return (
-        <form action={formAction} className="flex flex-col gap-4 w-full max-w-md">
-            <div className="flex flex-col gap-2">
-                <label htmlFor="fullName" className="font-medium">{t('full_name')}</label>
-                <input
-                    type="text"
-                    id="fullName"
-                    name="fullName"
-                    required
-                    className="border p-2 rounded text-white font-semibold"
-                    placeholder={t('enter_full_name')}
-                />
-            </div>
-            <div className="flex flex-col gap-2">
-                <label htmlFor="email" className="font-medium">{t('email')}</label>
-                <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    required
-                    className="border p-2 rounded text-white font-semibold"
-                    placeholder={t('enter_email')}
-                />
-            </div>
-            <button
-                type="submit"
-                disabled={isPending}
-                className="bg-blue-500 text-white p-2 rounded hover:bg-blue-600 disabled:bg-blue-300"
-            >
-                {isPending ? t('sending') : t('send')}
-            </button>
-            {state?.message && (
-                <p className="mt-4 text-lg font-semibold">{state.message}</p>
-            )}
-        </form>
-    )
+  return (
+    <Card className="w-full max-w-md flex flex-col items-center gap-6">
+      <h1 className="text-4xl font-semibold">
+        {t('log_in')}
+      </h1>
+      <Form action={formAction}>
+        <div className="flex flex-col gap-2">
+          <label htmlFor="fullName">{t('full_name')}</label>
+          <InputWithIcon
+            type="text"
+            id="fullName"
+            name="fullName"
+            required
+            icon={<PersonIcon className="w-5 h-5" />}
+            placeholder={t('enter_full_name')}
+          />
+        </div>
+        <div className="flex flex-col gap-2">
+          <label htmlFor="email">{t('email')}</label>
+          <InputWithIcon
+            type="email"
+            id="email"
+            name="email"
+            required
+            icon={<AtIcon className="w-5 h-5" />}
+            placeholder={t('enter_email')}
+          />
+        </div>
+        <Button type="submit" disabled={isPending}>
+          {isPending ? t('sending') : t('send')}
+        </Button>
+        {state?.message && (
+          <p className={`mt-4 text-lg text-center ${state.success ? 'text-green-600' : 'text-red-600'}`}>
+            {state.message}
+          </p>
+        )}
+      </Form>
+      <StyledLink href="/public">
+        {t('view_public_display')} <ArrowRightIcon className="w-4 h-4" />
+      </StyledLink>
+    </Card>
+  )
 }
