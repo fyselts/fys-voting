@@ -41,3 +41,12 @@ export function ArrowRightIcon(props: React.SVGProps<SVGSVGElement>) {
     </svg>
   );
 }
+
+export function ExclamationIcon(props: React.SVGProps<SVGSVGElement>) {
+  return (
+    <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth={1.5} width={20} height={20} {...props}>
+      <circle cx="10" cy="10" r="9" />
+      <path strokeLinecap="round" strokeLinejoin="round" d="M10 6v5m0 3h.01" />
+    </svg>
+  );
+}

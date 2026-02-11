@@ -17,10 +17,10 @@ export function PublicResults({ results, emptyOption, totalVotesCast, maxVotes, 
   const { t } = useLanguage()
 
   return (
-    <div className="min-h-screen bg-gray-100 p-8 relative">
+    <div className="min-h-screen p-8 relative">
       <div className="max-w-4xl mx-auto space-y-8">
         <div className="flex justify-between items-center">
-          <h1 className="text-3xl font-bold text-black">{t('voting_public_display')}</h1>
+          <h1 className="text-3xl font-bold text-black">{t('join_vote')}</h1>
           <Link
             href="/"
             className="px-4 py-2 bg-[var(--color-primary)] text-white rounded hover:bg-[color:rgba(0,8,125,0.85)] transition-colors"
@@ -31,7 +31,6 @@ export function PublicResults({ results, emptyOption, totalVotesCast, maxVotes, 
 
         <div className="grid md:grid-cols-2 gap-8">
           <div className="flex flex-col items-center justify-center space-y-4">
-            <h2 className="text-xl font-semibold text-black">{t('join_vote')}</h2>
             <QRCodeDisplay />
           </div>
 

@@ -8,6 +8,7 @@ import { Form } from '@/components/ui/form'
 import { Button } from '@/components/ui/button'
 import { StyledLink } from '@/components/ui/styled-link'
 import { InputWithIcon } from '@/components/ui/input-with-icon'
+import { InfoBox } from '@/components/ui/info-box'
 import { PersonIcon, AtIcon, ArrowRightIcon } from '@/components/ui/icons'
 
 const initialState = {
@@ -31,6 +32,11 @@ export function LoginForm({ onSuccess }: { onSuccess: (email: string) => void })
       <h1 className="text-4xl font-semibold">
         {t('log_in')}
       </h1>
+
+      <InfoBox>
+        {t('use_correct_email')}
+      </InfoBox>
+
       <Form action={formAction}>
         <div className="flex flex-col gap-2">
           <label htmlFor="fullName">{t('full_name')}</label>

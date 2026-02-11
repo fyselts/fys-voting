@@ -8,6 +8,7 @@ import { Form } from '@/components/ui/form'
 import { Button } from '@/components/ui/button'
 import { InputWithIcon } from '@/components/ui/input-with-icon'
 import { KeypadIcon } from '@/components/ui/icons'
+import { InfoBox } from '@/components/ui/info-box'
 
 export function OtpForm({ email }: { email: string }) {
   const initialState = {
@@ -20,6 +21,9 @@ export function OtpForm({ email }: { email: string }) {
   return (
     <Card className="w-full max-w-md flex flex-col items-center gap-6">
       <h1 className="text-3xl font-semibold">{t('verification_code')}</h1>
+      <InfoBox>
+        {t('verification_code_info', { email })}
+      </InfoBox>
       <Form action={formAction}>
         <input type="hidden" name="email" value={email} />
         <div className="flex flex-col gap-2">
