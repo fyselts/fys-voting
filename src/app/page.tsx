@@ -1,26 +1,20 @@
-'use client';
+import { redirect } from 'next/navigation';
 
-import { useState } from 'react';
+import { LoginFlow } from '@/features/auth/components/login-flow';
+import { getSession, getUserRole } from '@/features/auth/lib/auth';
 
-import { LoginForm } from '@/features/auth/components/login-form';
-import { OtpForm } from '@/features/auth/components/otp-form';
+export default async function Home() {
+  const user = await getSession();
 
-export default function Home() {
-  const [step, setStep] = useState<'login' | 'otp'>('login');
-  const [email, setEmail] = useState('');
-
-  const handleLoginSuccess = (email: string) => {
-    setEmail(email);
-    setStep('otp');
-  };
+  if (user?.email) {
+    const role = await getUserRole(user.email);
+    if (role === 'admin') redirect('/admin');
+    if (role === 'user') redirect('/user');
+  }
 
   return (
     <div className="relative flex min-h-screen flex-col items-center justify-center p-4">
-      {step === 'login' ? (
-        <LoginForm onSuccess={handleLoginSuccess} />
-      ) : (
-        <OtpForm email={email} />
-      )}
+      <LoginFlow />
     </div>
   );
 }

@@ -12,6 +12,7 @@ interface PublicResultsProps {
   totalVotesCast: number;
   maxVotes: number;
   isPublished: boolean;
+  dashboardHref?: string | undefined;
 }
 
 export function PublicResults({
@@ -20,6 +21,7 @@ export function PublicResults({
   totalVotesCast,
   maxVotes,
   isPublished,
+  dashboardHref,
 }: PublicResultsProps) {
   const { t } = useLanguage();
 
@@ -29,10 +31,10 @@ export function PublicResults({
         <div className="flex items-center justify-between">
           <h1 className="text-3xl font-bold text-black">{t('join_vote')}</h1>
           <Link
-            href="/"
+            href={dashboardHref ?? '/'}
             className="rounded bg-[var(--color-primary)] px-4 py-2 text-white transition-colors hover:bg-[color:rgba(0,8,125,0.85)]"
           >
-            {t('go_to_login')}
+            {dashboardHref ? t('go_to_dashboard') : t('go_to_login')}
           </Link>
         </div>
 

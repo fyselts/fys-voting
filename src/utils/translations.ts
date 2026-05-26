@@ -30,6 +30,7 @@ const enTranslations = {
   // Public Display
   voting_public_display: 'Voting Public Display',
   go_to_login: 'Go to Login',
+  go_to_dashboard: 'Go to Dashboard',
   join_vote: 'Mark attendance and join the vote',
   no_standard_options: 'No standard options available.',
   results_hidden: 'Results are hidden',
@@ -189,6 +190,7 @@ const etTranslations: typeof enTranslations = {
   // Public Display
   voting_public_display: 'Hääletuse Avalik Ekraan',
   go_to_login: 'Logi sisse',
+  go_to_dashboard: 'Mine juhtpaneelile',
   join_vote: 'Märgi kohalolu ja liitu hääletusega',
   no_standard_options: 'Valikud puuduvad.',
   results_hidden: 'Tulemused on peidetud',
