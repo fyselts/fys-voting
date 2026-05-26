@@ -1,9 +1,9 @@
 'use client';
 
-import { logout } from '@/features/auth/actions';
-import { useLanguage } from '@/context/LanguageContext';
 import { Button } from '@/components/ui/button';
 import { Form } from '@/components/ui/form';
+import { useLanguage } from '@/context/LanguageContext';
+import { logout } from '@/features/auth/actions';
 
 export function LogoutButton() {
   const { t } = useLanguage();

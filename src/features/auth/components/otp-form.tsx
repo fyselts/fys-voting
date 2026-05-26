@@ -1,14 +1,15 @@
 'use client';
 
 import { useActionState } from 'react';
-import { verifyOtp } from '@/features/auth/actions';
-import { useLanguage } from '@/context/LanguageContext';
+
+import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Form } from '@/components/ui/form';
-import { Button } from '@/components/ui/button';
-import { InputWithIcon } from '@/components/ui/input-with-icon';
 import { KeypadIcon } from '@/components/ui/icons';
 import { InfoBox } from '@/components/ui/info-box';
+import { InputWithIcon } from '@/components/ui/input-with-icon';
+import { useLanguage } from '@/context/LanguageContext';
+import { verifyOtp } from '@/features/auth/actions';
 
 export function OtpForm({ email }: { email: string }) {
   const initialState = {

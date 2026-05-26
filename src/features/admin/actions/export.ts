@@ -1,7 +1,7 @@
 'use server';
 
-import { getSupabaseClient } from '@/lib/supabase';
 import { requireAuth } from '@/features/auth/lib/auth';
+import { getSupabaseClient } from '@/lib/supabase';
 
 export async function getExportData() {
   await requireAuth('admin');

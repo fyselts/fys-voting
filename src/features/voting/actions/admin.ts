@@ -1,8 +1,9 @@
 'use server';
 
-import { getSupabaseClient } from '@/lib/supabase';
 import { revalidatePath } from 'next/cache';
+
 import { requireAuth } from '@/features/auth/lib/auth';
+import { getSupabaseClient } from '@/lib/supabase';
 
 export async function getVotingState() {
   const supabase = getSupabaseClient();
@@ -23,8 +24,8 @@ export async function getVotingState() {
 
   return {
     settings,
-    options: options || [],
-    votersCount: votersCount || 0,
+    options: options ?? [],
+    votersCount: votersCount ?? 0,
   };
 }
 

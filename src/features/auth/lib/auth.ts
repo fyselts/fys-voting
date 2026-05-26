@@ -1,5 +1,6 @@
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
+
 import { getSupabaseClient } from '@/lib/supabase';
 
 export async function getSession() {

@@ -2,11 +2,12 @@
 
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
+
 import { useLanguage } from '@/context/LanguageContext';
 
 export function AdminTabs() {
   const searchParams = useSearchParams();
-  const currentTab = searchParams.get('tab') || 'overview';
+  const currentTab = searchParams.get('tab') ?? 'overview';
   const { t } = useLanguage();
 
   return (

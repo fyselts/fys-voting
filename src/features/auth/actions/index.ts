@@ -1,8 +1,9 @@
 'use server';
 
-import { getSupabaseClient } from '@/lib/supabase';
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
+
+import { getSupabaseClient } from '@/lib/supabase';
 
 interface ActionState {
   success: boolean;
@@ -101,7 +102,7 @@ export async function verifyOtp(
       .eq('email', email)
       .single();
 
-    const role = profile?.role || 'user';
+    const role = profile?.role ?? 'user';
 
     await updateLastLogin(email);
 

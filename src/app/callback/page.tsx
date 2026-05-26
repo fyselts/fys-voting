@@ -1,7 +1,8 @@
 'use client';
 
-import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { useEffect, useState } from 'react';
+
 import { setSession } from '@/features/auth/actions';
 
 export default function CallbackPage() {
@@ -15,12 +16,12 @@ export default function CallbackPage() {
 
       if (hash) {
         const params = new URLSearchParams(hash.substring(1));
-        accessToken = params.get('access_token') || '';
+        accessToken = params.get('access_token') ?? '';
       }
 
       if (!accessToken) {
         const params = new URLSearchParams(window.location.search);
-        accessToken = params.get('access_token') || '';
+        accessToken = params.get('access_token') ?? '';
       }
 
       if (accessToken) {
@@ -47,7 +48,7 @@ export default function CallbackPage() {
         }
       }
     };
-    handleAuth();
+    void handleAuth();
   }, [router]);
 
   return (

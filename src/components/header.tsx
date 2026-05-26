@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
+
 import { LanguageToggle } from './ui/language-toggle';
 
 export default function Header() {

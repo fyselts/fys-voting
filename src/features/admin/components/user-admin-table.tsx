@@ -23,7 +23,7 @@ export function UserAdminTable<T extends { id: string | number }>({
         <thead>
           <tr className="border-b border-gray-200 dark:border-gray-700">
             {columns.map((col, idx) => (
-              <th key={idx} className={col.className || 'px-4 py-3'}>
+              <th key={idx} className={col.className ?? 'px-4 py-3'}>
                 {col.header}
               </th>
             ))}
@@ -36,7 +36,7 @@ export function UserAdminTable<T extends { id: string | number }>({
               className="border-b border-gray-100 hover:bg-gray-50 dark:border-gray-800 dark:hover:bg-zinc-700/50"
             >
               {columns.map((col, idx) => (
-                <td key={idx} className={col.className || 'px-4 py-3'}>
+                <td key={idx} className={col.className ?? 'px-4 py-3'}>
                   {typeof col.accessor === 'function'
                     ? col.accessor(row)
                     : (row[col.accessor] as React.ReactNode)}

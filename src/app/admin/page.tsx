@@ -1,6 +1,6 @@
+import { AdminDashboard } from '@/features/admin/components/admin-dashboard';
 import { requireAuth } from '@/features/auth/lib/auth';
 import { getSupabaseClient } from '@/lib/supabase';
-import { AdminDashboard } from '@/features/admin/components/admin-dashboard';
 
 export default async function AdminPage({
   searchParams,
@@ -10,15 +10,15 @@ export default async function AdminPage({
   await requireAuth('admin');
   const supabase = getSupabaseClient();
   const { tab } = await searchParams;
-  const currentTab = tab || 'overview';
+  const currentTab = tab ?? 'overview';
 
   const { data: profiles } = await supabase
     .from('profiles')
     .select('*')
     .order('created_at', { ascending: false });
 
-  const admins = profiles?.filter((p) => p.role === 'admin') || [];
-  const allUsers = profiles?.filter((p) => p.role === 'user') || [];
+  const admins = profiles?.filter((p) => p.role === 'admin') ?? [];
+  const allUsers = profiles?.filter((p) => p.role === 'user') ?? [];
 
   const regularUsers = allUsers.filter(
     (p) => !p.email.includes('@temp.fys-voting.com')

@@ -1,18 +1,19 @@
 'use client';
 
 import React from 'react';
+
 import { useLanguage } from '@/context/LanguageContext';
-import { LogoutButton } from '@/features/auth/components/logout-button';
-import { AdminTabs } from '@/features/admin/components/admin-tabs';
-import { UserAdminTable } from '@/features/admin/components/user-admin-table';
-import { DeleteUserButton } from '@/features/admin/components/delete-user-button';
-import { DeleteAllUsersButton } from '@/features/admin/components/delete-all-users-button';
 import { AddUserForm } from '@/features/admin/components/add-user-form';
-import { CsvUploadForm } from '@/features/admin/components/csv-upload-form';
-import { AdminVotingTab } from '@/features/admin/components/admin-voting-tab';
-import { TempUserManager } from '@/features/admin/components/temp-user-manager';
 import { AdminManagementTab } from '@/features/admin/components/admin-management-tab';
+import { AdminTabs } from '@/features/admin/components/admin-tabs';
+import { AdminVotingTab } from '@/features/admin/components/admin-voting-tab';
+import { CsvUploadForm } from '@/features/admin/components/csv-upload-form';
+import { DeleteAllUsersButton } from '@/features/admin/components/delete-all-users-button';
+import { DeleteUserButton } from '@/features/admin/components/delete-user-button';
+import { TempUserManager } from '@/features/admin/components/temp-user-manager';
+import { UserAdminTable } from '@/features/admin/components/user-admin-table';
 import { VoteQuotaEditor } from '@/features/admin/components/vote-quota-editor';
+import { LogoutButton } from '@/features/auth/components/logout-button';
 import { isToday } from '@/features/voting/utils/date-utils';
 
 interface Profile {
@@ -75,7 +76,7 @@ export function AdminDashboard({
       : t('never'),
     role_label: <span className="capitalize">{user.role}</span>,
     vote_quota_editor: (
-      <VoteQuotaEditor userId={user.id} initialQuota={user.vote_quota || 1} />
+      <VoteQuotaEditor userId={user.id} initialQuota={user.vote_quota ?? 1} />
     ),
     attended_label: isToday(user.last_login_at) ? (
       <span className="inline-flex items-center rounded-full bg-green-100 px-2.5 py-0.5 text-xs font-medium text-green-800 dark:bg-green-900 dark:text-green-200">

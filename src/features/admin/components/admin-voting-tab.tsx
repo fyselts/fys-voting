@@ -1,23 +1,23 @@
 'use client';
 
-import { useState, useTransition, useEffect } from 'react';
+import { useEffect,useState, useTransition } from 'react';
+
+import { useLanguage } from '@/context/LanguageContext';
 import {
-  getVotingState,
-  updateVotingSettings,
   addOption,
   deleteOption,
-  toggleVotingStatus,
-  togglePublishStatus,
+  getVotingState,
   resetVoting,
+  togglePublishStatus,
+  toggleVotingStatus,
+  updateVotingSettings,
 } from '@/features/voting/actions/admin';
-import { VotingSettings, VotingOption } from '@/features/voting/types';
-import { useLanguage } from '@/context/LanguageContext';
+import { type VotingOption,type VotingSettings } from '@/features/voting/types';
 
 export function AdminVotingTab() {
   const [settings, setSettings] = useState<VotingSettings | null>(null);
   const [options, setOptions] = useState<VotingOption[]>([]);
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [votersCount, setVotersCount] = useState(0);
+   
   const [isPending, startTransition] = useTransition();
   const { t } = useLanguage();
 
@@ -29,7 +29,6 @@ export function AdminVotingTab() {
     const data = await getVotingState();
     setSettings(data.settings);
     setOptions(data.options);
-    setVotersCount(data.votersCount);
     if (data.settings) {
       setTitle(data.settings.title);
       setMaxChoices(data.settings.max_choices);
@@ -38,7 +37,7 @@ export function AdminVotingTab() {
 
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect
-    fetchState();
+    void fetchState();
   }, []);
 
   const handleUpdateSettings = () => {

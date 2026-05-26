@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { ExclamationIcon } from '@/components/ui/icons';
 
 interface InfoBoxProps {

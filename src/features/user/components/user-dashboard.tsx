@@ -4,7 +4,7 @@ import { Card } from '@/components/ui/card';
 import { useLanguage } from '@/context/LanguageContext';
 import { LogoutButton } from '@/features/auth/components/logout-button';
 import { UserVoting } from '@/features/voting/components/user-voting';
-import { VotingSettings, VotingOption } from '@/features/voting/types';
+import { type VotingOption,type VotingSettings } from '@/features/voting/types';
 
 interface UserDashboardProps {
   user: {

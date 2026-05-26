@@ -1,8 +1,9 @@
 'use client';
 
 import { useState, useTransition } from 'react';
-import { updateVoteQuota } from '@/features/user/actions/admin';
+
 import { useLanguage } from '@/context/LanguageContext';
+import { updateVoteQuota } from '@/features/user/actions/admin';
 
 interface VoteQuotaEditorProps {
   userId: string;

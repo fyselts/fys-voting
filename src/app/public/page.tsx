@@ -1,6 +1,6 @@
-import { getSupabaseClient } from '@/lib/supabase';
-import { VotingOption } from '@/features/voting/types';
 import { PublicResults } from '@/features/voting/components/public-results';
+import { type VotingOption } from '@/features/voting/types';
+import { getSupabaseClient } from '@/lib/supabase';
 
 export const dynamic = 'force-dynamic';
 
@@ -18,7 +18,7 @@ export default async function PublicPage() {
     .from('voters')
     .select('*', { count: 'exact', head: true });
 
-  const totalVotesCast = totalVotersCount || 0;
+  const totalVotesCast = totalVotersCount ?? 0;
 
   let results: VotingOption[] = [];
   let emptyOption: VotingOption | undefined;

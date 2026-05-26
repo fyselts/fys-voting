@@ -1,8 +1,9 @@
 'use server';
 
-import { getSupabaseClient } from '@/lib/supabase';
 import { revalidatePath } from 'next/cache';
+
 import { requireAuth } from '@/features/auth/lib/auth';
+import { getSupabaseClient } from '@/lib/supabase';
 
 interface ActionState {
   success: boolean;

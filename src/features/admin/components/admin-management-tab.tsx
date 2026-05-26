@@ -2,9 +2,9 @@
 
 import { useTransition } from 'react';
 import * as XLSX from 'xlsx';
-import { getExportData } from '@/features/admin/actions/export';
-import { useLanguage } from '@/context/LanguageContext';
 
+import { useLanguage } from '@/context/LanguageContext';
+import { getExportData } from '@/features/admin/actions/export';
 import { isToday } from '@/features/voting/utils/date-utils';
 
 interface ExportUser {
@@ -38,7 +38,7 @@ export function AdminManagementTab() {
           [t('full_name')]: user.full_name,
           [t('email')]: user.email,
           [t('role')]: user.role,
-          [t('votes_admin')]: user.vote_quota || 1,
+          [t('votes_admin')]: user.vote_quota ?? 1,
           [t('last_login')]: user.last_login_at
             ? new Date(user.last_login_at).toLocaleString()
             : t('never'),
@@ -52,7 +52,7 @@ export function AdminManagementTab() {
           [t('full_name')]: user.full_name,
           [t('email')]: user.email,
           [t('role')]: user.role,
-          [t('votes_admin')]: user.vote_quota || 1,
+          [t('votes_admin')]: user.vote_quota ?? 1,
           [t('last_login')]: user.last_login_at
             ? new Date(user.last_login_at).toLocaleString()
             : t('never'),

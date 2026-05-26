@@ -2,6 +2,7 @@
 
 import { QRCodeSVG } from 'qrcode.react';
 import { useState } from 'react';
+
 import { useLanguage } from '@/context/LanguageContext';
 
 export function QRCodeDisplay() {

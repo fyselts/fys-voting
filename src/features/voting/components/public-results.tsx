@@ -1,9 +1,10 @@
 'use client';
 
+import Link from 'next/link';
+
 import { useLanguage } from '@/context/LanguageContext';
 import { QRCodeDisplay } from '@/features/user/components/qr-code-display';
-import Link from 'next/link';
-import { VotingOption } from '@/features/voting/types';
+import { type VotingOption } from '@/features/voting/types';
 
 interface PublicResultsProps {
   results: VotingOption[];

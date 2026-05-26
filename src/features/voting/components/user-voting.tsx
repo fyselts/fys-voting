@@ -1,12 +1,13 @@
 'use client';
 
-import { useState, useTransition } from 'react';
-import { submitVote } from '@/features/voting/actions/user';
 import { useRouter } from 'next/navigation';
-import { useLanguage } from '@/context/LanguageContext';
-import { VotingSettings, VotingOption } from '@/features/voting/types';
-import { Card } from '@/components/ui/card';
+import { useState, useTransition } from 'react';
+
 import { Button } from '@/components/ui/button';
+import { Card } from '@/components/ui/card';
+import { useLanguage } from '@/context/LanguageContext';
+import { submitVote } from '@/features/voting/actions/user';
+import { type VotingOption,type VotingSettings } from '@/features/voting/types';
 
 interface UserVotingProps {
   initialState: {

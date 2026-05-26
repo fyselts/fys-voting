@@ -1,7 +1,8 @@
 'use client';
 
 import React, { createContext, useContext, useSyncExternalStore } from 'react';
-import { translations, Language, TranslationKey } from '@/utils/translations';
+
+import { type Language, type TranslationKey,translations } from '@/utils/translations';
 
 const STORAGE_KEY = 'app-language';
 const CHANGE_EVENT = 'app-language-change';

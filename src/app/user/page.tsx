@@ -1,6 +1,6 @@
 import { requireAuth } from '@/features/auth/lib/auth';
-import { getUserVotingState } from '@/features/voting/actions/user';
 import { UserDashboard } from '@/features/user/components/user-dashboard';
+import { getUserVotingState } from '@/features/voting/actions/user';
 
 export default async function UserPage() {
   const { user } = await requireAuth('user');
@@ -8,7 +8,7 @@ export default async function UserPage() {
 
   return (
     <UserDashboard
-      user={{ ...user, email: user.email || '' }}
+      user={{ ...user, email: user.email ?? '' }}
       votingState={votingState}
     />
   );

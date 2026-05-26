@@ -1,8 +1,9 @@
 'use client';
 
 import React, { useState, useTransition } from 'react';
-import { createBulkUsers } from '@/features/user/actions/admin';
+
 import { useLanguage } from '@/context/LanguageContext';
+import { createBulkUsers } from '@/features/user/actions/admin';
 
 export function CsvUploadForm() {
   const [isPending, startTransition] = useTransition();
@@ -72,7 +73,7 @@ export function CsvUploadForm() {
         setMessage({
           text: result.success
             ? t('users_imported')
-            : result.message || 'Error',
+            : result.message ?? 'Error',
           type: result.success ? 'success' : 'error',
         });
       });

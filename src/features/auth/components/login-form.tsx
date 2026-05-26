@@ -1,15 +1,16 @@
 'use client';
 
 import { useActionState, useEffect } from 'react';
-import { checkUser } from '@/features/auth/actions';
-import { useLanguage } from '@/context/LanguageContext';
+
+import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Form } from '@/components/ui/form';
-import { Button } from '@/components/ui/button';
-import { StyledLink } from '@/components/ui/styled-link';
-import { InputWithIcon } from '@/components/ui/input-with-icon';
+import { ArrowRightIcon,AtIcon, PersonIcon } from '@/components/ui/icons';
 import { InfoBox } from '@/components/ui/info-box';
-import { PersonIcon, AtIcon, ArrowRightIcon } from '@/components/ui/icons';
+import { InputWithIcon } from '@/components/ui/input-with-icon';
+import { StyledLink } from '@/components/ui/styled-link';
+import { useLanguage } from '@/context/LanguageContext';
+import { checkUser } from '@/features/auth/actions';
 
 const initialState = {
   message: '',

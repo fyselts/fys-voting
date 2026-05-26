@@ -1,12 +1,13 @@
 'use client';
 
-import { useState } from 'react';
-import { createTempUser } from '@/features/user/actions/admin';
-import { QRCodeSVG } from 'qrcode.react';
-import { UserAdminTable } from '@/features/admin/components/user-admin-table';
-import { DeleteUserButton } from '@/features/admin/components/delete-user-button';
 import { useRouter } from 'next/navigation';
+import { QRCodeSVG } from 'qrcode.react';
+import { useState } from 'react';
+
 import { useLanguage } from '@/context/LanguageContext';
+import { DeleteUserButton } from '@/features/admin/components/delete-user-button';
+import { UserAdminTable } from '@/features/admin/components/user-admin-table';
+import { createTempUser } from '@/features/user/actions/admin';
 
 interface TempUser {
   id: string;
@@ -45,7 +46,7 @@ export function TempUserManager({ tempUsers }: { tempUsers: TempUser[] }) {
       (event.target as HTMLFormElement).reset();
       router.refresh();
     } else {
-      setError(res.message || 'Failed to create user');
+      setError(res.message ?? 'Failed to create user');
     }
   }
 

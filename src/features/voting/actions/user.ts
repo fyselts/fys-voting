@@ -1,8 +1,9 @@
 'use server';
 
-import { getSupabaseClient } from '@/lib/supabase';
-import { requireAuth } from '@/features/auth/lib/auth';
 import { revalidatePath } from 'next/cache'; // Unused
+
+import { requireAuth } from '@/features/auth/lib/auth';
+import { getSupabaseClient } from '@/lib/supabase';
 
 export async function getUserVotingState() {
   const { user } = await requireAuth('user');
@@ -21,7 +22,7 @@ export async function getUserVotingState() {
     .eq('email', user.email!)
     .single();
 
-  const voteQuota = profile?.vote_quota || 1;
+  const voteQuota = profile?.vote_quota ?? 1;
 
   /*
     console.log(`User ${user.id} has a vote quota of ${voteQuota}`)
@@ -33,7 +34,7 @@ export async function getUserVotingState() {
     .select('*', { count: 'exact', head: true })
     .eq('user_id', user.id);
 
-  const used = votesUsed || 0;
+  const used = votesUsed ?? 0;
   const votesRemaining = Math.max(0, voteQuota - used);
   const hasVoted = votesRemaining === 0; // Lock UI if no votes left
 
@@ -49,7 +50,7 @@ export async function getUserVotingState() {
       .from('voting_options')
       .select('id, name, vote_count, created_at')
       .order('created_at', { ascending: true });
-    options = opts || [];
+    options = opts ?? [];
   }
 
   if (!settings?.is_published) {
@@ -61,7 +62,7 @@ export async function getUserVotingState() {
     .from('voters')
     .select('*', { count: 'exact', head: true });
 
-  const totalVotesCast = totalVoters || 0;
+  const totalVotesCast = totalVoters ?? 0;
 
   return {
     settings,
@@ -93,14 +94,14 @@ export async function submitVote(optionIds: string[]) {
     .eq('email', user.email!)
     .single();
 
-  const voteQuota = profile?.vote_quota || 1;
+  const voteQuota = profile?.vote_quota ?? 1;
 
   const { count: votesUsed } = await supabase
     .from('voters')
     .select('*', { count: 'exact', head: true })
     .eq('user_id', user.id);
 
-  const used = votesUsed || 0;
+  const used = votesUsed ?? 0;
 
   if (used >= voteQuota) {
     return { success: false, message: 'You have used all your votes' };
