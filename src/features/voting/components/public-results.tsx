@@ -1,54 +1,64 @@
-'use client'
+'use client';
 
-import { useLanguage } from '@/context/LanguageContext'
-import { QRCodeDisplay } from '@/features/user/components/qr-code-display'
-import Link from 'next/link'
-import { VotingOption } from '@/features/voting/types'
+import { useLanguage } from '@/context/LanguageContext';
+import { QRCodeDisplay } from '@/features/user/components/qr-code-display';
+import Link from 'next/link';
+import { VotingOption } from '@/features/voting/types';
 
 interface PublicResultsProps {
-  results: VotingOption[]
-  emptyOption?: VotingOption | undefined
-  totalVotesCast: number
-  maxVotes: number
-  isPublished: boolean
+  results: VotingOption[];
+  emptyOption?: VotingOption | undefined;
+  totalVotesCast: number;
+  maxVotes: number;
+  isPublished: boolean;
 }
 
-export function PublicResults({ results, emptyOption, totalVotesCast, maxVotes, isPublished }: PublicResultsProps) {
-  const { t } = useLanguage()
+export function PublicResults({
+  results,
+  emptyOption,
+  totalVotesCast,
+  maxVotes,
+  isPublished,
+}: PublicResultsProps) {
+  const { t } = useLanguage();
 
   return (
-    <div className="min-h-screen p-8 relative">
-      <div className="max-w-4xl mx-auto space-y-8">
-        <div className="flex justify-between items-center">
+    <div className="relative min-h-screen p-8">
+      <div className="mx-auto max-w-4xl space-y-8">
+        <div className="flex items-center justify-between">
           <h1 className="text-3xl font-bold text-black">{t('join_vote')}</h1>
           <Link
             href="/"
-            className="px-4 py-2 bg-[var(--color-primary)] text-white rounded hover:bg-[color:rgba(0,8,125,0.85)] transition-colors"
+            className="rounded bg-[var(--color-primary)] px-4 py-2 text-white transition-colors hover:bg-[color:rgba(0,8,125,0.85)]"
           >
             {t('go_to_login')}
           </Link>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-8">
+        <div className="grid gap-8 md:grid-cols-2">
           <div className="flex flex-col items-center justify-center space-y-4">
             <QRCodeDisplay />
           </div>
 
-          <div className="bg-white p-6 rounded-lg shadow-md">
-            <h2 className="text-xl font-semibold mb-4 text-black">{t('results')}</h2>
+          <div className="rounded-lg bg-white p-6 shadow-md">
+            <h2 className="mb-4 text-xl font-semibold text-black">
+              {t('results')}
+            </h2>
             {isPublished ? (
               <div className="space-y-4">
                 {results.map((option) => (
                   <div key={option.id} className="space-y-2">
                     <div className="flex justify-between text-sm">
                       <span className="text-black">{option.name}</span>
-                      <span className="font-medium text-black">{option.vote_count} {t('votes')}</span>
+                      <span className="font-medium text-black">
+                        {option.vote_count} {t('votes')}
+                      </span>
                     </div>
-                    <div className="w-full bg-gray-200 rounded-full h-2.5">
+                    <div className="h-2.5 w-full rounded-full bg-gray-200">
                       <div
-                        className="bg-[var(--color-primary)] h-2.5 rounded-full transition-all duration-500"
+                        className="h-2.5 rounded-full bg-[var(--color-primary)] transition-all duration-500"
                         style={{
-                          width: `${(option.vote_count / maxVotes) * 100}%`
+                          width: `${(option.vote_count / maxVotes) * 100}%`,
                         }}
                       ></div>
                     </div>
@@ -58,21 +68,29 @@ export function PublicResults({ results, emptyOption, totalVotesCast, maxVotes, 
                   <p className="text-black">{t('no_standard_options')}</p>
                 )}
 
-                <div className="mt-8 pt-4 border-t border-gray-200">
+                <div className="mt-8 border-t border-gray-200 pt-4">
                   <div className="flex justify-between text-sm text-gray-600">
-                    <span>{t('total_votes_cast', { total: '' }).replace(': ', '')}:</span>
-                    <span className="font-semibold text-black">{totalVotesCast}</span>
+                    <span>
+                      {t('total_votes_cast', { total: '' }).replace(': ', '')}:
+                    </span>
+                    <span className="font-semibold text-black">
+                      {totalVotesCast}
+                    </span>
                   </div>
                   {emptyOption && emptyOption.vote_count > 0 && (
-                    <div className="flex justify-between text-sm text-gray-600 mt-1">
-                      <span>{t('empty_votes', { count: '' }).replace(': ', '')}:</span>
-                      <span className="font-semibold text-black">{emptyOption.vote_count}</span>
+                    <div className="mt-1 flex justify-between text-sm text-gray-600">
+                      <span>
+                        {t('empty_votes', { count: '' }).replace(': ', '')}:
+                      </span>
+                      <span className="font-semibold text-black">
+                        {emptyOption.vote_count}
+                      </span>
                     </div>
                   )}
                 </div>
               </div>
             ) : (
-              <div className="flex flex-col items-center justify-center h-64 text-gray-500">
+              <div className="flex h-64 flex-col items-center justify-center text-gray-500">
                 <p className="text-lg text-black">{t('results_hidden')}</p>
                 <p className="text-sm text-black">{t('voting_in_progress')}</p>
               </div>
@@ -81,5 +99,5 @@ export function PublicResults({ results, emptyOption, totalVotesCast, maxVotes, 
         </div>
       </div>
     </div>
-  )
+  );
 }

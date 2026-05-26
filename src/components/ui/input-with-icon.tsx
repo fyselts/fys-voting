@@ -7,9 +7,11 @@ export function InputWithIcon({
 }: React.InputHTMLAttributes<HTMLInputElement> & { icon: React.ReactNode }) {
   return (
     <div className="relative flex items-center text-[var(--on-container)]">
-      <span className="absolute left-3 pointer-events-none flex items-center">{icon}</span>
+      <span className="pointer-events-none absolute left-3 flex items-center">
+        {icon}
+      </span>
       <input
-        className={`pl-10 pr-3 py-2 border border-[var(--border)] rounded w-full bg-[var(--background)] focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)] ${className}`}
+        className={`w-full rounded border border-[var(--border)] bg-[var(--background)] py-2 pr-3 pl-10 focus:ring-2 focus:ring-[var(--color-primary)] focus:outline-none ${className}`}
         {...props}
       />
     </div>

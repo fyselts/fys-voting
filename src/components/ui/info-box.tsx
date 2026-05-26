@@ -8,11 +8,11 @@ interface InfoBoxProps {
 
 export function InfoBox({ children, className = '' }: InfoBoxProps) {
   return (
-    <div className={`flex items-start gap-3 text-[var(--on-container)] bg-[var(--background)] p-4 rounded w-full border border-[var(--border)] ${className}`}>
-      <ExclamationIcon className="w-5 h-5 flex-shrink-0 mt-0.5" />
-      <div className="text-sm whitespace-pre-line">
-        {children}
-      </div>
+    <div
+      className={`flex w-full items-start gap-3 rounded border border-[var(--border)] bg-[var(--background)] p-4 text-[var(--on-container)] ${className}`}
+    >
+      <ExclamationIcon className="mt-0.5 h-5 w-5 flex-shrink-0" />
+      <div className="text-sm whitespace-pre-line">{children}</div>
     </div>
   );
 }

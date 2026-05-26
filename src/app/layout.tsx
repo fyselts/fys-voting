@@ -1,13 +1,13 @@
-import type { Metadata } from "next";
+import type { Metadata } from 'next';
 // import { Geist, Geist_Mono } from "next/font/google"; // Removed if not using or installed. Default usually has it.
 // Assuming we don't need fonts or file isn't present, let's keep it simple.
-import "./globals.css";
+import './globals.css';
 import { LanguageProvider } from '@/context/LanguageContext';
 import Header from '@/components/header';
 
 export const metadata: Metadata = {
-  title: "FYS Voting",
-  description: "FYS Voting System",
+  title: 'FYS Voting',
+  description: 'FYS Voting System',
 };
 
 export default function RootLayout({

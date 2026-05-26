@@ -1,10 +1,11 @@
-
 // Levenshtein distance calculation
 export function levenshtein(a: string, b: string): number {
   if (a.length === 0) return b.length;
   if (b.length === 0) return a.length;
 
-  const matrix: number[][] = Array(b.length + 1).fill(null).map(() => Array(a.length + 1).fill(0));
+  const matrix: number[][] = Array(b.length + 1)
+    .fill(null)
+    .map(() => Array(a.length + 1).fill(0));
 
   // increment along the first column of each row
   for (let i = 0; i <= b.length; i++) {
@@ -47,7 +48,10 @@ export function normalizeName(name: string): string {
 }
 
 export function tokenize(name: string): string[] {
-  return name.toLowerCase().split(/[^a-z0-9\u00C0-\u00FF]+/).filter(Boolean);
+  return name
+    .toLowerCase()
+    .split(/[^a-z0-9\u00C0-\u00FF]+/)
+    .filter(Boolean);
 }
 
 export function areNamesSimilar(inputName: string, dbName: string): boolean {
@@ -175,7 +179,7 @@ export function areNamesSimilar(inputName: string, dbName: string): boolean {
     // 3. Reverse Combo Match (Input "mari" matches DB "mariliis"?)
     // If the user inputs a partial name that is PART of a DB token.
     // e.g. Input "mari", DB "mariliis".
-    // This is implicit if we accept partial parts? 
+    // This is implicit if we accept partial parts?
     // "mari" is effectively a subset of "mariliis".
     // Check if `inToken` is a significant substring of any `dbToken`.
     for (let i = 0; i < dbTokens.length; i++) {
