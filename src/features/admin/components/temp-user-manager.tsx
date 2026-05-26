@@ -8,7 +8,14 @@ import { DeleteUserButton } from '@/features/admin/components/delete-user-button
 import { useRouter } from 'next/navigation'
 import { useLanguage } from '@/context/LanguageContext'
 
-export function TempUserManager({ tempUsers }: { tempUsers: any[] }) {
+interface TempUser {
+  id: string
+  full_name: string
+  created_at: string
+  last_login_at: string | null
+}
+
+export function TempUserManager({ tempUsers }: { tempUsers: TempUser[] }) {
   const [createdUser, setCreatedUser] = useState<{ name: string, link: string } | null>(null)
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState('')
@@ -89,14 +96,14 @@ export function TempUserManager({ tempUsers }: { tempUsers: any[] }) {
             { header: t('full_name'), accessor: 'full_name' },
             {
               header: t('created_at'),
-              accessor: (row: any) => new Date(row.created_at).toLocaleString(),
+              accessor: (row: TempUser) => new Date(row.created_at).toLocaleString(),
               className: 'text-sm text-gray-500'
             },
             {
               header: t('has_logged_in'),
-              accessor: (row: any) => row.last_login_at ? t('yes') : t('no'),
+              accessor: (row: TempUser) => row.last_login_at ? t('yes') : t('no'),
             },
-            { header: t('actions'), accessor: (row: any) => <DeleteUserButton userId={row.id} /> },
+            { header: t('actions'), accessor: (row: TempUser) => <DeleteUserButton userId={row.id} /> },
           ]}
           emptyMessage={t('no_temp_users_found')}
         />

@@ -13,13 +13,6 @@ import {
 import { VotingSettings, VotingOption } from '@/features/voting/types'
 import { useLanguage } from '@/context/LanguageContext'
 
-// Need to match return type of getVotingState
-interface VotingState {
-  settings: VotingSettings | null
-  options: VotingOption[]
-  votersCount: number
-}
-
 export function AdminVotingTab() {
   const [settings, setSettings] = useState<VotingSettings | null>(null)
   const [options, setOptions] = useState<VotingOption[]>([])
@@ -44,6 +37,7 @@ export function AdminVotingTab() {
   }
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     fetchState()
   }, [])
 

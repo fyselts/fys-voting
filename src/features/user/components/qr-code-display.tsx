@@ -1,16 +1,12 @@
 'use client'
 
 import { QRCodeSVG } from 'qrcode.react'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { useLanguage } from '@/context/LanguageContext'
 
 export function QRCodeDisplay() {
-  const [origin, setOrigin] = useState('')
+  const [origin] = useState(() => typeof window !== 'undefined' ? window.location.origin : '')
   const { t } = useLanguage()
-
-  useEffect(() => {
-    setOrigin(window.location.origin)
-  }, [])
 
   if (!origin) return null
 

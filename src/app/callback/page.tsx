@@ -32,7 +32,7 @@ export default function CallbackPage() {
                     } else {
                         setMessage('Failed to create session')
                     }
-                } catch (e) {
+                } catch {
                     setMessage('Error during authentication.')
                 }
             } else {

@@ -124,7 +124,7 @@ export async function createTempUser(fullName: string) {
     const email = `temp_${id}@temp.fys-voting.com`
 
     // 1. Create auth user with auto-confirm
-    const { data: authData, error: authError } = await supabase.auth.admin.createUser({
+    const { error: authError } = await supabase.auth.admin.createUser({
         email,
         email_confirm: true,
         user_metadata: { full_name: fullName }

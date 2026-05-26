@@ -3,7 +3,6 @@
 import { useState } from 'react'
 import { LoginForm } from '@/features/auth/components/login-form'
 import { OtpForm } from '@/features/auth/components/otp-form'
-import { useLanguage } from '@/context/LanguageContext'
 
 export default function Home() {
   const [step, setStep] = useState<'login' | 'otp'>('login')

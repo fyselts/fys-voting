@@ -1,5 +1,6 @@
 'use client'
 
+import React from 'react'
 import { useLanguage } from '@/context/LanguageContext'
 import { LogoutButton } from '@/features/auth/components/logout-button'
 import { AdminTabs } from '@/features/admin/components/admin-tabs'
@@ -14,11 +15,32 @@ import { AdminManagementTab } from '@/features/admin/components/admin-management
 import { VoteQuotaEditor } from '@/features/admin/components/vote-quota-editor'
 import { isToday } from '@/features/voting/utils/date-utils'
 
+interface Profile {
+  id: string
+  full_name: string
+  email: string
+  last_login_at: string | null
+  role: string
+  vote_quota?: number
+  created_at?: string
+}
+
+interface AdminRow extends Profile {
+  last_login_at_formatted: string
+  role_label: React.ReactNode
+  attended_label: React.ReactNode
+}
+
+interface UserRow extends AdminRow {
+  vote_quota_editor: React.ReactNode
+  delete_button: React.ReactNode
+}
+
 interface AdminDashboardProps {
   currentTab: string
-  admins: any[]
-  regularUsers: any[]
-  tempUsers: any[]
+  admins: Profile[]
+  regularUsers: Profile[]
+  tempUsers: Profile[]
 }
 
 export function AdminDashboard({ currentTab, admins, regularUsers, tempUsers }: AdminDashboardProps) {
@@ -75,9 +97,9 @@ export function AdminDashboard({ currentTab, admins, regularUsers, tempUsers }: 
                 columns={[
                   { header: t('full_name'), accessor: 'full_name' },
                   { header: t('email'), accessor: 'email' },
-                  { header: t('last_login'), accessor: (row: any) => row.last_login_at_formatted, className: 'py-3 px-4 text-sm text-gray-500 dark:text-gray-400' },
-                  { header: t('role'), accessor: (row: any) => row.role_label },
-                  { header: t('attended'), accessor: (row: any) => row.attended_label },
+                  { header: t('last_login'), accessor: (row: AdminRow) => row.last_login_at_formatted, className: 'py-3 px-4 text-sm text-gray-500 dark:text-gray-400' },
+                  { header: t('role'), accessor: (row: AdminRow) => row.role_label },
+                  { header: t('attended'), accessor: (row: AdminRow) => row.attended_label },
                 ]}
                 emptyMessage={t('no_admins_found')}
               />
@@ -94,10 +116,10 @@ export function AdminDashboard({ currentTab, admins, regularUsers, tempUsers }: 
                 columns={[
                   { header: t('full_name'), accessor: 'full_name' },
                   { header: t('email'), accessor: 'email' },
-                  { header: t('last_login'), accessor: (row: any) => row.last_login_at_formatted, className: 'py-3 px-4 text-sm text-gray-500 dark:text-gray-400' },
-                  { header: t('votes_admin'), accessor: (row: any) => row.vote_quota_editor },
-                  { header: t('attended'), accessor: (row: any) => row.attended_label },
-                  { header: t('actions'), accessor: (row: any) => row.delete_button },
+                  { header: t('last_login'), accessor: (row: UserRow) => row.last_login_at_formatted, className: 'py-3 px-4 text-sm text-gray-500 dark:text-gray-400' },
+                  { header: t('votes_admin'), accessor: (row: UserRow) => row.vote_quota_editor },
+                  { header: t('attended'), accessor: (row: UserRow) => row.attended_label },
+                  { header: t('actions'), accessor: (row: UserRow) => row.delete_button },
                 ]}
                 emptyMessage={t('no_users_found')}
               />

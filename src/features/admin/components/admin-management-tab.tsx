@@ -7,6 +7,19 @@ import { useLanguage } from '@/context/LanguageContext'
 
 import { isToday } from '@/features/voting/utils/date-utils'
 
+interface ExportUser {
+  full_name: string
+  email: string
+  role: string
+  vote_quota?: number
+  last_login_at?: string | null
+}
+
+interface VotingResult {
+  name: string
+  vote_count: number
+}
+
 export function AdminManagementTab() {
   const [isExporting, startTransition] = useTransition()
   const { t } = useLanguage()
@@ -21,7 +34,7 @@ export function AdminManagementTab() {
         const data = await getExportData()
 
         // 1. Prepare All Users Data
-        const allUsersData = data.allUsers.map((user: any) => ({
+        const allUsersData = data.allUsers.map((user: ExportUser) => ({
           [t('full_name')]: user.full_name,
           [t('email')]: user.email,
           [t('role')]: user.role,
@@ -31,7 +44,7 @@ export function AdminManagementTab() {
         }))
 
         // 2. Prepare Temp Users Data
-        const tempUsersData = data.tempUsers.map((user: any) => ({
+        const tempUsersData = data.tempUsers.map((user: ExportUser) => ({
           [t('full_name')]: user.full_name,
           [t('email')]: user.email,
           [t('role')]: user.role,
@@ -41,7 +54,7 @@ export function AdminManagementTab() {
         }))
 
         // 3. Prepare Voting Results Data
-        const votingResultsData = data.votingResults.map((option: any) => ({
+        const votingResultsData = data.votingResults.map((option: VotingResult) => ({
           [t('option_name')]: option.name,
           [t('votes_admin')]: option.vote_count
         }))
