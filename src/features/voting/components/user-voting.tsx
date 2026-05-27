@@ -128,15 +128,9 @@ export function UserVoting({ initialState }: UserVotingProps) {
 
   // Case 4: Voting is active and user has votes remaining
   const handleToggleOption = (id: string) => {
-    setWarning(null); // Clear warning on interaction
+    setWarning(null);
 
-    if (!EMPTY_OPTION_ID) {
-      console.error('Empty vote option not found!');
-      return;
-    }
-
-    if (id === EMPTY_OPTION_ID) {
-      // Toggle Empty Vote
+    if (EMPTY_OPTION_ID && id === EMPTY_OPTION_ID) {
       if (selectedOptions.includes(EMPTY_OPTION_ID)) {
         setSelectedOptions([]);
       } else {
@@ -145,20 +139,17 @@ export function UserVoting({ initialState }: UserVotingProps) {
         }
         setSelectedOptions([EMPTY_OPTION_ID]);
       }
-    } else {
-      // Toggle Standard Option
-      if (selectedOptions.includes(EMPTY_OPTION_ID)) {
-        setWarning(t('empty_vote_warning_self_deselect'));
-        setSelectedOptions([id]);
-      } else {
-        if (selectedOptions.includes(id)) {
-          setSelectedOptions(selectedOptions.filter((oid) => oid !== id));
-        } else {
-          if (selectedOptions.length < settings.max_choices) {
-            setSelectedOptions([...selectedOptions, id]);
-          }
-        }
-      }
+      return;
+    }
+
+    // Standard option
+    if (EMPTY_OPTION_ID && selectedOptions.includes(EMPTY_OPTION_ID)) {
+      setWarning(t('empty_vote_warning_self_deselect'));
+      setSelectedOptions([id]);
+    } else if (selectedOptions.includes(id)) {
+      setSelectedOptions(selectedOptions.filter((oid) => oid !== id));
+    } else if (selectedOptions.length < settings.max_choices) {
+      setSelectedOptions([...selectedOptions, id]);
     }
   };
 

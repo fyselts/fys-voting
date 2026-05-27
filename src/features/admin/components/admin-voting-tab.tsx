@@ -182,7 +182,7 @@ export function AdminVotingTab() {
             value={newOption}
             onChange={(e) => setNewOption(e.target.value)}
             placeholder={t('enter_option_name')}
-            className="flex-1 rounded border p-2 text-white"
+            className="flex-1 rounded border p-2"
             onKeyDown={(e) => e.key === 'Enter' && handleAddOption()}
           />
           <button
